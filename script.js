@@ -14,27 +14,27 @@ function determineLength(){
   passwordLength = prompt("Choose between 8-128 characters to generate your random password): ");
 
     if (passwordLength<8){
-      alert("Password length must be a number between 8-128 characters");
+      window.alert("Please note! Password length must be a number between 8-128 characters");
       determineLength();
     }else if (passwordLength>128){
-      alert("Password length must be a number between 8-128 characters");
+      window.alert("Please note! Password length must be a number between 8-128 characters");
       determineLength();
     }else if (isNaN(passwordLength)){
-      alert("Password length must be a number between 8-128 characters");
+      window.alert("Password length must be a number between 8-128 characters");
       determineLength();
     }else{
-    alert("There will be 3 questions on the next screen, please choose yes or no to the following.\nPlease note: If you choose 'No' for your answer, your password will only contain lowercase letters.");
+    window.alert("There will be 3 questions on the next screen, please choose yes or no to the following.\nPlease note: If you choose 'No' for your answer, your password will only contain lowercase letters.");
     }
     return passwordLength;
 }
 
 //Function whether to include uppercase in password
 function determineUppercase(){
- checkUpper= prompt("Do you want to include uppercase letters in your password? \n(Yes or No)");
+ checkUpper= prompt("Do you want to include uppercase letters in your password? \n (Yes or No)");
    checkUpper = checkUpper.toLowerCase();
 
     if (checkUpper === null || checkUpper === ""){
-      alert("Must answer Yes or No");
+      window.alert("Must answer Yes or No");
       determineUppercase();
 
     }else if (checkUpper === "yes" || checkUpper ==="y"){
@@ -54,11 +54,11 @@ function determineUppercase(){
 
 //Function to determine numbers in the password
 function determineNumbers(){
-  checkNumber = prompt("Do you want to include numbers in your password? This will indicate a stronger password. \n(Yes or No)");
+  checkNumber = prompt("Do you want to include numbers in your password? This will indicate a stronger password. \n (Yes or No)");
    checkNumber = checkNumber.toLowerCase();
 
     if (checkNumber === null || checkNumber === ""){
-      alert("Must answer Yes or No");
+      window.alert("Must answer Yes or No");
       determineNumbers();
 
     }else if (checkNumber === "yes" || checkNumber ==="y"){
@@ -70,7 +70,7 @@ function determineNumbers(){
       return checkNumber;
     
     }else {
-      alert("Must answer Yes or No to continue");
+      window.alert("Must answer Yes or No to continue");
       determineNumbers();
     }
     return checkNumber;
@@ -78,11 +78,11 @@ function determineNumbers(){
 
 //Function to ask user if special characters should be included
 function determineSpecial(){
-  specialCheck = prompt("Do you want to include special characters in your password? \n(Yes or No)");
+  specialCheck = prompt("Do you want to include special characters in your password? \n (Yes or No)");
     specialCheck = specialCheck.toLowerCase();
 
     if (specialCheck === null || specialCheck === ""){
-      alert("Must answer Yes or No to continue");
+      window.alert("Must answer Yes or No to continue");
       determineSpecial();
 
     }else if (specialCheck === "yes" || specialCheck ==="y"){
@@ -111,38 +111,38 @@ function generatePassword(){
   determineSpecial();
   console.log(specialCheck);
 
-var characters = lowercaseChar;
-var password = "";
-if (checkUpper && checkNumber && specialCheck){
-  characters += uppercaseChar + numberChar + specialChar;
+//assign to lower characters for the password
 
-}else if (checkUpper && checkNumber){
-  characters += uppercaseChar + numberChar;
+  var characters = lowercaseChar;
+  var password = "";
+  if (checkUpper && checkNumber && specialCheck){
+    characters += uppercaseChar + numberChar + specialChar;
+  
+  }else if (checkNumber && specialCheck){
+    characters += numberChar + specialChar;
+    
+  }else if (checkUpper && checkNumber){
+    characters += uppercaseChar + numberChar;
+  
+  }else if (checkUpper && specialCheck){
+    characters += uppercaseChar + specialChar;
+  }else if(checkNumber){
+    characters += numberChar;
 
-}else if (checkNumber && specialCheck){
-  characters += numberChar + specialChar;
-
-}else if (checkUpper && specialCheck){
-  characters += uppercaseChar + specialChar;
-
-}else if (checkUpper){
-  characters += uppercaseChar;
-
-}else if(checkNumber){
-  characters += numberChar;
-
-}else if (specialCheck){
-  characters += specialChar;
-
-}else{
-  characters === lowercaseChar;
-}
-
-  for(var i = 0; i < passwordLength; i++){
-    password += characters.charAt(Math.floor(Math.random() * characters.length));
+  }else if (checkUpper){
+    characters += uppercaseChar;
+  
+  }else if (specialCheck){
+    characters += specialChar;
+  
+  }else{
+    characters === lowercaseChar;
   }
-  return password;
-}
+    for(var i = 0; i < passwordLength; i++){
+      password += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return password;
+  }
 
 // Write password to the #password input
 function writePassword() {
